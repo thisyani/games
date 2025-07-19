@@ -34,8 +34,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 80px; /* 为固定的顶部栏留出空间 */
-    min-height: calc(100vh - 80px); /* 确保内容区域至少占满一屏 */
+    padding-top: 80px;
+    min-height: calc(100vh - 80px);
 }
 
 /* 顶部栏 */
@@ -45,7 +45,8 @@ body {
     left: 0;
     width: 100%;
     display: flex;
-    justify-content: flex-end;
+    /* **** 修改：让左右两边的元素分开对齐 **** */
+    justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
     background-color: var(--container-bg-color);
@@ -54,6 +55,43 @@ body {
     z-index: 100;
     transition: background-color 0.3s;
 }
+
+/* **** 新增：右侧控件的容器 **** */
+.top-bar-right {
+    display: flex;
+    align-items: center;
+}
+
+/* **** 新增：主页按钮的样式 **** */
+.home-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    border-radius: 50%; /* 圆形背景 */
+    transition: background-color 0.2s;
+}
+
+.home-button:hover {
+    background-color: rgba(0, 0, 0, 0.05); /* 鼠标悬停时一个淡淡的背景 */
+}
+
+body.dark-mode .home-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.home-button svg {
+    /* 使用颜色变量，使其能自动切换深色/亮色 */
+    fill: var(--text-color);
+    width: 26px;
+    height: 26px;
+    transition: fill 0.3s;
+}
+
+.home-button:hover svg {
+    fill: var(--link-color); /* 鼠标悬停时改变图标颜色 */
+}
+
 
 select {
     padding: 5px 8px;
