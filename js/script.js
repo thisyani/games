@@ -2,7 +2,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // 定义所有语言的翻译文本对象
-    // Key 对应 HTML 中的 data-lang-key
     const translations = {
         'zh-CN': {
             pageTitle: '游戏合辑',
@@ -41,25 +40,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeToggle = document.getElementById('theme-toggle');
     const translatableElements = document.querySelectorAll('[data-lang-key]');
 
-    // 封装语言切换的函数
+    // 封装语言切换的函数 (无变动)
     const changeLanguage = (lang) => {
-        // 检查是否存在该语言的翻译
         if (!translations[lang]) return; 
         
-        // 遍历所有带 data-lang-key 属性的元素
         translatableElements.forEach(element => {
             const key = element.dataset.langKey;
-            // 如果在该语言的翻译对象中找到了对应的key
             if (translations[lang][key]) {
-                // 更新元素的文本内容
                 element.textContent = translations[lang][key];
             }
         });
-        // 更新根元素<html>的lang属性，对SEO和屏幕阅读器友好
         document.documentElement.lang = lang;
     };
 
-    // 封装应用主题的函数
+    // 封装应用主题的函数 (无变动)
     const applyTheme = (theme) => {
         if (theme === 'dark') {
             document.body.classList.add('dark-mode');
@@ -70,43 +64,49 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
     
-    // ----- 事件监听器 -----
+    // ----- 事件监听器 (无变动) -----
 
-    // 监听语言选择器的变化
     languageSelector.addEventListener('change', (e) => {
         const selectedLang = e.target.value;
         changeLanguage(selectedLang);
-        // 将用户的语言偏好保存到浏览器的 localStorage 中
         localStorage.setItem('language', selectedLang);
     });
 
-    // 监听主题切换开关的变化
     themeToggle.addEventListener('change', (e) => {
         const theme = e.target.checked ? 'dark' : 'light';
         applyTheme(theme);
-        // 将用户的主题偏好保存到 localStorage
+        // 注意：这里保存用户选择的行为是关键，它使得用户的显式选择拥有最高优先级
         localStorage.setItem('theme', theme);
     });
 
-    // ----- 页面初始化 -----
+    // ----- 页面初始化 (逻辑更新) -----
 
-    // 1. 应用保存的主题，如果没有保存则默认为'light'
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    applyTheme(savedTheme);
+    // 1. 确定初始主题
+    const savedTheme = localStorage.getItem('theme'); // 检查用户是否已在本站保存偏好
 
-    // 2. 应用保存的语言
-    // 首先尝试从localStorage获取，如果没有，则尝试获取浏览器的语言
+    if (savedTheme) {
+        // 优先级1: 如果用户已在本站明确选择过主题，则使用该主题
+        applyTheme(savedTheme);
+    } else {
+        // 优先级2: 如果用户没有选择过，则检查其操作系统的设置
+        // window.matchMedia 用于检测CSS媒体查询的状态
+        // '(prefers-color-scheme: dark)' 会在系统为深色模式时返回true
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            applyTheme('dark');
+        } else {
+            applyTheme('light'); // 否则，默认使用亮色模式
+        }
+    }
+
+    // 2. 应用保存的语言或浏览器默认语言 (无变动)
     let savedLang = localStorage.getItem('language');
     if (!savedLang) {
-        // navigator.language 通常返回 "en-US", "zh-CN" 等，我们取前半部分
         savedLang = navigator.language.split('-')[0];
     }
     
     const supportedLangs = Object.keys(translations);
-    // 检查获取到的语言是否在我们支持的列表中，如果不支持，则默认使用英语
     const initialLang = supportedLangs.includes(savedLang) ? savedLang : 'en';
     
-    // 将下拉选择器的值设置为初始语言，并调用函数应用翻译
     languageSelector.value = initialLang;
     changeLanguage(initialLang);
 
