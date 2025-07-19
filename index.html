@@ -3,80 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的游戏合辑</title>
-    <style>
-        /* 这是一些基础的CSS样式，让页面看起来更美观 */
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-        }
-        .container {
-            width: 80%;
-            max-width: 600px;
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            text-align: center;
-            color: #444;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 15px;
-            margin-bottom: 25px;
-        }
-        ul {
-            list-style-type: none; /* 去掉列表前的默认圆点 */
-            padding: 0;
-        }
-        li {
-            background-color: #fafafa;
-            margin-bottom: 12px;
-            border-radius: 5px;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        li:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
-        }
-        a {
-            display: block;
-            padding: 15px 20px;
-            text-decoration: none; /* 去掉超链接的下划线 */
-            color: #007bff;
-            font-size: 18px;
-            font-weight: 500;
-        }
-        a:hover {
-            color: #0056b3;
-        }
-    </style>
+    <title data-lang-key="pageTitle">游戏合辑</title>
+    <!-- 修改此处的路径 -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
+    <div class="top-bar">
+        <!-- 语言选择器 -->
+        <select id="language-selector">
+            <option value="zh-CN">简体中文</option>
+            <option value="zh-TW">繁體中文</option>
+            <option value="en">English</option>
+            <option value="ja">日本語</option>
+            <option value="ru">Русский</option>
+        </select>
+
+        <!-- 深色模式开关 -->
+        <div class="theme-switch-wrapper">
+            <label class="theme-switch" for="theme-toggle">
+                <input type="checkbox" id="theme-toggle" />
+                <div class="slider round"></div>
+            </label>
+            <span data-lang-key="darkModeLabel">深色模式</span>
+        </div>
+    </div>
+
     <div class="container">
-        <h1>游戏合辑</h1>
-        <ul>
+        <h1 data-lang-key="headerTitle">游戏合辑</h1>
+        <ul id="game-list">
             <li>
-                <a href="https://efish.yani.qzz.io" target="_blank" rel="noopener noreferrer">1. 电子木鱼</a>
+                <a href="https://efish.yani.qzz.io" target="_blank" rel="noopener noreferrer" data-lang-key="game1">1. 电子木鱼</a>
             </li>
-            <!-- 您可以在这里继续添加更多的游戏 -->
-            <!-- 示例：
-            <li>
-                <a href="你的其他游戏链接" target="_blank" rel="noopener noreferrer">2. 另一个游戏</a>
-            </li>
-            <li>
-                <a href="你的其他游戏链接" target="_blank" rel="noopener noreferrer">3. 更多游戏</a>
-            </li>
-            -->
+            <!-- 新游戏可以继续在这里添加 -->
         </ul>
     </div>
 
+    <!-- 修改此处的路径 -->
+    <script src="js/script.js"></script>
 </body>
 </html>
