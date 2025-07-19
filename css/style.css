@@ -1,4 +1,4 @@
-/* 定义颜色变量，方便主题切换 */
+/* 定义亮色模式的颜色变量 */
 :root {
     --bg-color: #f4f4f9;
     --container-bg-color: #ffffff;
@@ -11,7 +11,7 @@
     --shadow-color: rgba(0, 0, 0, 0.1);
 }
 
-/* 深色模式下的颜色变量 */
+/* 定义深色模式的颜色变量 */
 body.dark-mode {
     --bg-color: #121212;
     --container-bg-color: #1e1e1e;
@@ -24,6 +24,7 @@ body.dark-mode {
     --shadow-color: rgba(0, 0, 0, 0.4);
 }
 
+/* 全局样式 */
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     background-color: var(--bg-color);
@@ -33,9 +34,11 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 80px; /* 为顶部栏留出空间 */
+    padding-top: 80px; /* 为固定的顶部栏留出空间 */
+    min-height: calc(100vh - 80px); /* 确保内容区域至少占满一屏 */
 }
 
+/* 顶部栏 */
 .top-bar {
     position: fixed;
     top: 0;
@@ -49,6 +52,7 @@ body {
     box-shadow: 0 2px 5px var(--shadow-color);
     box-sizing: border-box;
     z-index: 100;
+    transition: background-color 0.3s;
 }
 
 select {
@@ -58,8 +62,10 @@ select {
     background-color: var(--bg-color);
     color: var(--text-color);
     margin-right: 20px;
+    cursor: pointer;
 }
 
+/* 主题切换开关 */
 .theme-switch-wrapper {
     display: flex;
     align-items: center;
@@ -115,6 +121,7 @@ input:checked + .slider:before {
     transform: translateX(20px);
 }
 
+/* 内容容器 */
 .container {
     width: 90%;
     max-width: 600px;
@@ -122,7 +129,7 @@ input:checked + .slider:before {
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 15px var(--shadow-color);
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 h1 {
@@ -134,6 +141,7 @@ h1 {
     margin-bottom: 25px;
 }
 
+/* 游戏列表 */
 ul {
     list-style-type: none;
     padding: 0;
@@ -143,7 +151,7 @@ li {
     background-color: var(--list-item-bg-color);
     margin-bottom: 12px;
     border-radius: 5px;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s;
 }
 
 li:hover {
@@ -158,6 +166,7 @@ a {
     color: var(--link-color);
     font-size: 18px;
     font-weight: 500;
+    transition: color 0.3s;
 }
 
 a:hover {
