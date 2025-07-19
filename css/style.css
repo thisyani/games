@@ -45,7 +45,7 @@ body {
     left: 0;
     width: 100%;
     display: flex;
-    /* **** 修改：让左右两边的元素分开对齐 **** */
+    /* **** 关键修改：使用 space-between 将左右元素推到两端 **** */
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
@@ -56,24 +56,26 @@ body {
     transition: background-color 0.3s;
 }
 
-/* **** 新增：右侧控件的容器 **** */
+/* 右侧控件的容器 */
 .top-bar-right {
     display: flex;
     align-items: center;
+    /* **** 新增：使用 gap 属性为右侧控件之间提供间距 **** */
+    gap: 20px;
 }
 
-/* **** 新增：主页按钮的样式 **** */
+/* 主页按钮的样式 */
 .home-button {
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 5px;
-    border-radius: 50%; /* 圆形背景 */
+    border-radius: 50%;
     transition: background-color 0.2s;
 }
 
 .home-button:hover {
-    background-color: rgba(0, 0, 0, 0.05); /* 鼠标悬停时一个淡淡的背景 */
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
 body.dark-mode .home-button:hover {
@@ -81,7 +83,6 @@ body.dark-mode .home-button:hover {
 }
 
 .home-button svg {
-    /* 使用颜色变量，使其能自动切换深色/亮色 */
     fill: var(--text-color);
     width: 26px;
     height: 26px;
@@ -89,9 +90,8 @@ body.dark-mode .home-button:hover {
 }
 
 .home-button:hover svg {
-    fill: var(--link-color); /* 鼠标悬停时改变图标颜色 */
+    fill: var(--link-color);
 }
-
 
 select {
     padding: 5px 8px;
@@ -99,7 +99,8 @@ select {
     border: 1px solid var(--border-color);
     background-color: var(--bg-color);
     color: var(--text-color);
-    margin-right: 20px;
+    /* **** 关键修改：移除此处的 margin-right，由父级的 gap 统一管理间距 **** */
+    /* margin-right: 20px; */
     cursor: pointer;
 }
 
