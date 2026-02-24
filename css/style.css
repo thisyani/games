@@ -27,7 +27,8 @@ body.dark-mode {
 /* 全局样式 */
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    background-color: var(--bg-color);
+    background: var(--bg-color) url('https://yani.qzz.io/img/wallpaper.jpg') no-repeat center center fixed;
+    background-size: cover;
     color: var(--text-color);
     margin: 0;
     transition: background-color 0.3s, color 0.3s;
@@ -210,4 +211,64 @@ a {
 
 a:hover {
     color: var(--link-hover-color);
+}
+
+.starlight {
+    position: fixed;
+    pointer-events: none;
+    left: 0; top: 0;
+    width: 16px; height: 16px;
+    z-index: 9999;
+    opacity: 0.9;
+    /* 粒子动画：弹出到目标点 & 旋转 & 缩放 & 消失 */
+    animation: starlight-fly 0.7s cubic-bezier(.2,1,.6,1) forwards;
+    will-change: transform, opacity;
+    transform: translate(-50%, -50%) scale(1) rotate(var(--star-rotate));
+}
+.starlight::before {
+    content: '';
+    display: block;
+    width: 100%; height: 100%;
+    background: none;
+    /* 五角星，SVG mask；渐变色更可爱 */
+    mask: url('data:image/svg+xml;utf8,<svg viewBox="0 0 50 50" width="16" height="16" xmlns="http://www.w3.org/2000/svg"><polygon fill="white" points="25,2 32,18 49,18 36,29 40,46 25,36 10,46 14,29 1,18 18,18"/></svg>') center/contain no-repeat;
+    -webkit-mask: url('data:image/svg+xml;utf8,<svg viewBox="0 0 50 50" width="16" height="16" xmlns="http://www.w3.org/2000/svg"><polygon fill="white" points="25,2 32,18 49,18 36,29 40,46 25,36 10,46 14,29 1,18 18,18"/></svg>') center/contain no-repeat;
+    background: radial-gradient(ellipse at 60% 30%, white 65%, var(--star-color, #ffe) 100%);
+    box-shadow: 0 0 8px 2px #fff8;
+}
+
+/* 飞出动画 */
+@keyframes starlight-fly {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.5) rotate(var(--star-rotate));
+        filter: blur(0);
+    }
+    60% {
+        opacity: 1;
+        transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy)))
+                    scale(1.1) rotate(var(--star-rotate));
+        filter: blur(0.5px);
+    }
+    85% {
+        opacity: 0.8;
+        filter: blur(1px);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy)))
+                    scale(0.4) rotate(calc(var(--star-rotate) + 30deg));
+        filter: blur(2px);
+    }
+}
+
+header {
+    position: sticky;      /* 关键属性 */
+    top: 0;                /* 吸附于页面顶端 */
+    z-index: 2000;         /* 确保在其他层之上 */
+    background: var(--header-bg-color);
+    color: var(--header-text-color);
+    padding: 1rem 0;
+    transition: background 0.3s;
+    width: 100%;           /* 保证全宽 */
 }
