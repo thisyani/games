@@ -110,4 +110,35 @@ document.addEventListener('DOMContentLoaded', () => {
     languageSelector.value = initialLang;
     changeLanguage(initialLang);
 
+	});
+
+// 更好看且不移位的五角星点击特效
+document.addEventListener('click', function(e) {
+    // 避免在按钮栏等区域触发粒子（���有需要可恢复下句）
+    // if (e.target.closest('nav,.control-btn,input,select,button')) return;
+
+    const cx = e.clientX, cy = e.clientY;
+    const colors = ['#fff8b3', '#ffe684', '#ffb6b3', '#b4daff', '#fcf2ff'];
+    const count = 8 + Math.floor(Math.random() * 3); // 8~10颗星
+    for (let i = 0; i < count; i++) {
+        const star = document.createElement('div');
+        star.className = 'starlight';
+        // 方向、距离、初始缩放和转角
+        const angle = 2 * Math.PI * (i / count) + Math.random() * 0.8;
+        const radius = 32 + Math.random() * 20;
+        const dx = Math.cos(angle) * radius;
+        const dy = Math.sin(angle) * radius;
+
+        star.style.left = cx + 'px';
+        star.style.top = cy + 'px';
+        star.style.setProperty('--dx', dx + 'px');
+        star.style.setProperty('--dy', dy + 'px');
+        star.style.setProperty('--star-color', colors[Math.floor(Math.random()*colors.length)]);
+        star.style.setProperty('--star-rotate', (Math.random()*360) + 'deg');
+
+        document.body.appendChild(star);
+
+        // 动画结束后自动销毁
+        star.addEventListener('animationend', () => star.remove());
+    }
 });
