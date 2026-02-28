@@ -27,7 +27,7 @@ body.dark-mode {
 /* 全局样式 */
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    background: var(--bg-color) url('https://yani.qzz.io/img/wallpaper.jpg') no-repeat center center fixed;
+    background: var(--bg-color) url('https://yani.xx.kg/img/wallpaper.jpg') no-repeat center center fixed;
     background-size: cover;
     color: var(--text-color);
     margin: 0;
@@ -271,4 +271,5 @@ header {
     padding: 1rem 0;
     transition: background 0.3s;
     width: 100%;           /* 保证全宽 */
+
 }
